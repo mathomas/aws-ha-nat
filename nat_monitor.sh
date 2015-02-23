@@ -58,7 +58,7 @@ fi
 
 while [ . ]; do
   # Check health of other NAT instance
-  echo "Pinging other NAT at: ${NAT_IP}"
+  #echo `date` "-- Pinging other NAT at: ${NAT_IP}"
   pingresult=`ping -c $Num_Pings -W $Ping_Timeout $NAT_IP | grep time= | wc -l`
   # Check to see if any of the health checks succeeded, if not
   if [ "$pingresult" == "0" ]; then
