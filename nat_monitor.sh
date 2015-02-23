@@ -74,7 +74,7 @@ while [ . ]; do
 	ROUTE_HEALTHY=1
       fi
       # Check NAT state to see if we should stop it or start it again
-	   # This sample script works well with EC2 API tools as of  2015-02-22. If you are using a different version than I was, you'll need to modify the field number in the 'awk' below.
+	   # This sample script works well with EC2 API tools as of  2015-02-22. If you are using a different version than I was, you might need to modify the field number in the 'awk' below.
       NAT_STATE=`/opt/aws/bin/ec2-describe-instances $NAT_ID -U $EC2_URL | grep INSTANCE | awk '{print $6;}'`
       if [ "$NAT_STATE" == "stopped" ]; then
     	echo `date` "-- Other NAT instance stopped, starting it back up"
