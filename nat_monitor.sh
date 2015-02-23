@@ -58,6 +58,7 @@ fi
 
 while [ . ]; do
   # Check health of other NAT instance
+  echo "Pinging other NAT at: ${NAT_IP}"
   pingresult=`ping -c $Num_Pings -W $Ping_Timeout $NAT_IP | grep time= | wc -l`
   # Check to see if any of the health checks succeeded, if not
   if [ "$pingresult" == "0" ]; then
@@ -73,8 +74,8 @@ while [ . ]; do
 	ROUTE_HEALTHY=1
       fi
       # Check NAT state to see if we should stop it or start it again
-	  # This sample script works well with EC2 API tools version 1.6.12.2 2013-10-15. If you are using a different version and your script is stuck at NAT_STATE, please modify the script to "print $5;" instead of "print $4;".
-      NAT_STATE=`/opt/aws/bin/ec2-describe-instances $NAT_ID -U $EC2_URL | grep INSTANCE | awk '{print $4;}'`
+	   # This sample script works well with EC2 API tools as of  2015-02-22. If you are using a different version than I was, you'll need to modify the field number in the 'awk' below.
+      NAT_STATE=`/opt/aws/bin/ec2-describe-instances $NAT_ID -U $EC2_URL | grep INSTANCE | awk '{print $6;}'`
       if [ "$NAT_STATE" == "stopped" ]; then
     	echo `date` "-- Other NAT instance stopped, starting it back up"
         /opt/aws/bin/ec2-start-instances $NAT_ID -U $EC2_URL
