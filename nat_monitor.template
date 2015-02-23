@@ -1,7 +1,7 @@
 {
   "AWSTemplateFormatVersion" : "2010-09-09",
 
-  "Description" : "NAT Monitor: Tempalte to launch two NAT nodes in an existing VPC in a hot/hot NAT configuration. This template assumes you already have a VPC configured with public subnets in 2 AZs, cooresponding subnets, and route tables configured for your private subnets.",
+  "Description" : "NAT Monitor: Template to launch two NAT nodes in an existing VPC in a hot/hot NAT configuration. This template assumes you already have a VPC configured with public subnets in 2 AZs, cooresponding private subnets, and route tables configured for your private subnets.",
 
   "Parameters" : {
 
@@ -81,7 +81,7 @@
   "Mappings" : {
     "AWSNATAMI" : {
       "us-east-1"      : { "AMI" : "ami-54cf5c3d" },
-      "us-west-2"      : { "AMI" : "ami-8e27adbe" },
+      "us-west-2"      : { "AMI" : "ami-030f4133" },
       "us-west-1"      : { "AMI" : "ami-b63210f3" },
       "eu-west-1"      : { "AMI" : "ami-3c5f5748" },
       "ap-southeast-1" : { "AMI" : "ami-ba7538e8" },
@@ -184,7 +184,7 @@
 	  "EOF\n",
           "# Download nat_monitor.sh and configure\n",
           "cd /root\n",
-	  "wget http://media.amazonwebservices.com/articles/nat_monitor_files/nat_monitor.sh\n",
+	  "wget https://raw.githubusercontent.com/mathomas/aws-ha-nat/master/nat_monitor.sh\n",
 	  "# Wait for NAT #2 to boot up and update PrivateRouteTable2\n",
 	  "sleep 180\n",
 	  "NAT_ID=\n",
